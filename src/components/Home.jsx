@@ -1,12 +1,19 @@
 import React from 'react'
-import Nav from '../partials/Nav'
+import Header from './Header'
+import Hero from './Hero'
+import About from './About'
 
 const Home = () => {
   return (
-    <div>
-        <Nav />
-    </div>
+    <>
+      <Header />
+     <main>
+      <Hero />
+      <About />
+     </main>
+    </>
   )
+    
 }
 
 export default Home
