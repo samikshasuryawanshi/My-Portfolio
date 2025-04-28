@@ -39,9 +39,107 @@ body::-webkit-scrollbar-thumb:hover {
     100% {
       transform: translateX(-50%);
     }
-  }
+}
   
-  .animate-wave {
-    animation: wave 40s linear infinite;
-  }
+.animate-wave {
+    animation: wave 35s linear infinite;
+}
+
+.box1{
+    background: linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17)); 
+}
+.gradient-border {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none; /* Remove all borders */
+    overflow: hidden; /* Ensure content stays inside */
+}
   
+.gradient-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Position at the bottom */
+    left: 5%;
+    width: 60%;
+    height: 2px; /* Adjust thickness of the bottom border */
+    background: linear-gradient(to right, rgba(59, 130, 246, 1), rgba(168, 85, 247, 0)); /* Gradient fades out to transparent */
+}
+/* 
+.projectDiv{
+    background: linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17));
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+} */
+#linkedin, #github {
+  background: linear-gradient(to right, rgb(9, 9, 9),rgb(22, 22, 22),rgb(10, 10, 10));
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    border-radius: 50%;
+}
+#leetcode{
+    background: linear-gradient(to right, rgb(9, 9, 9),rgb(22, 22, 22),rgb(10, 10, 10));
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    border-radius: 50%;
+}
+#linkedin:hover, #leetcode:hover, #github:hover{
+    transform: scale(1.1);
+    transition: all .2s ease-in-out;
+}
+
+
+.gradient-border-skill {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove all borders */
+  overflow: hidden; /* Ensure content stays inside */
+}
+
+
+.gradient-border-skill::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Position at the bottom */
+  width: 50%;
+  left:3%;
+  height: 2px; /* Adjust thickness of the bottom border */
+  background: linear-gradient(to right, rgba(59, 130, 246, 1), rgba(168, 85, 247, 0)); /* Gradient fades out to transparent */
+}
+
+.skills{
+   background: linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17));
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+.gradient-border-Project {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove all borders */
+  overflow: hidden; /* Ensure content stays inside */
+}
+
+
+.gradient-border-Project::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Position at the bottom */
+  width: 100%;
+  left:3%;
+  height: 2px; /* Adjust thickness of the bottom border */
+  background: linear-gradient(to right, rgba(59, 130, 246, 1), rgba(168, 85, 247, 0)); /* Gradient fades out to transparent */
+}
+
+
+.projects{
+    background: linear-gradient(to right, rgb(14, 14, 14),rgb(22, 22, 22),rgb(14, 14, 14));
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+ }
+ 

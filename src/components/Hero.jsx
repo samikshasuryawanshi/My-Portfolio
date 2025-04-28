@@ -5,7 +5,7 @@ import MovingThread from '../partials/MovingThread'
 
 const Hero = () => {
   return (
-    <div className='h-screen  text-white w-full p-5 lg:p-10 flex flex-col justify-center items-center'>
+    <div id='home' className='h-screen relative  text-white w-full p-5 lg:p-10 flex flex-col justify-center items-center'>
       <MovingThread />
 
       {/* Hero Title Section */}

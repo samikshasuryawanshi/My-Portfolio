@@ -3,7 +3,7 @@ import React from 'react';
 const MovingThread = () => {
   return (
     <div className="absolute bottom-0 left-0 w-full h-[300px] sm:h-[350px] md:h-[400px] overflow-hidden -z-10">
-      <div className="relative flex w-[200%] h-full animate-wave">
+      <div className=" relative flex w-[200%] h-full animate-wave">
         <svg
           className="w-1/2 h-full s"
           viewBox="0 0 1440 320"

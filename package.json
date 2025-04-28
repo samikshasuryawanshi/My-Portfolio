@@ -10,15 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@tailwindcss/postcss": "^4.1.4",
     "framer-motion": "^12.9.1",
     "gsap": "^3.12.7",
     "motion": "^12.9.1",
+    "noisejs": "^2.1.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.2",
+    "react-scroll": "^1.9.3",
     "react-simple-typewriter": "^5.0.1",
+    "recharts": "^2.15.3",
+    "swiper": "^11.2.6",
     "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^4.1.4"
   },
