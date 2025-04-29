@@ -56,10 +56,10 @@ const Amoeba = () => {
   const pathData = generateSmoothPath(pointsRef.current, time);
 
   return (
-    <div className="flex relative items-start justify-end h-[55vh] bg-transparent">
-      <img className="z-9 absolute top-[35%] left-[30%] h-[30vh] " src="./profile.png" alt="svg" />
+    <div className="flex relative items-start justify-start h-[55vh] lg:mt-0 mt-[-10%]">
+      <img className="z-9 absolute top-[45%] left-[35%] h-[30vh] " src="./profile.png" alt="svg" />
 
-      <svg viewBox="0 0 400 400" width="400" height="400">
+      <svg viewBox="0 0 400 400" width="500" height="500">
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#60A5FA" /> {/* blue */}

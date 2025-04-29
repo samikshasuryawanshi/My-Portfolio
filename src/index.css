@@ -143,3 +143,31 @@ body::-webkit-scrollbar-thumb:hover {
      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
  }
  
+#cv:hover i{
+    background: linear-gradient(to right, rgb(14, 14, 14),rgb(22, 22, 22),rgb(14, 14, 14));
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all .4s ease-in-out;
+ }
+
+#connect::after{
+    content: '';
+    position: absolute;
+    bottom: 0; /* Position at the bottom */
+    height: 100%;
+    width: 0%;
+    left: 0;
+    background: linear-gradient(to right, rgb(14, 14, 14),rgb(22, 22, 22),rgb(14, 14, 14));/* Gradient fades out to transparent */
+    z-index: -1; /* Ensure it's behind the text */
+    transition: all .4s ease-in-out;
+ }
+
+#connect:hover::after{
+    width: 100%;
+    transition: all .4s ease-in-out;
+}
+.contactForm{
+    background: linear-gradient(to right, rgb(14, 14, 14),rgb(22, 22, 22),rgb(14, 14, 14));
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
