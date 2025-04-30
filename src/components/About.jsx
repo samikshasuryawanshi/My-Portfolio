@@ -32,7 +32,7 @@ const About = () => {
   return (
     <div id='about' className='lg:h-[90vh] h-[145vh] overflow-hidden aboutSection relative text-zinc-50 w-full '>
       {/* Animated Box */}
-      <div className='box1 p-5 absolute lg:left-15 lg:top-15 top-5 left-2 shadow-2xl rounded-lg lg:w-1/2 w-full h-fit  lg:h-fit '>
+      <div className='box1 p-5 absolute lg:left-15  lg:top-15 top-5 left-2 shadow-2xl rounded-lg lg:w-1/2 w-full h-fit  lg:h-fit '>
           <h1 className='lg:text-3xl w-1/2 gradient-border'>About Me</h1>
 
           <div className='flex flex-col justify-start items-start h-fit lg:p-5 p-5'>
@@ -52,7 +52,7 @@ const About = () => {
       </div>
 
       {/* Amoeba Section */}
-      <div className='box2 absolute lg:top-[5%] top-[55%] lg:right-15 w-full lg:w-1/3 h-fit lg:flex flex-col justify-start items-start'>
+      <div className='box2 absolute overflow-hidden lg:top-[5%] top-[55%] lg:right-15 w-full lg:w-1/3 h-fit lg:flex flex-col justify-start items-start'>
         <Amoeba />
          
           <div className="contact-cta lg:mt-2 mt-10 text-center">

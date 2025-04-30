@@ -59,7 +59,7 @@ const Amoeba = () => {
     <div className="flex justify-center items-center  lg:h-[55vh] h-[40vh] mt-0 lg:mt-0">
       <img className="z-9 absolute top-[25%] left-[30%] h-[30vh] lg:h-[35vh] " src="./profile.png" alt="svg" />
 
-      <svg viewBox="0 0 400 400" width="500" height="500">
+      <svg  viewBox="0 0 400 400" width="500" height="500">
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#60A5FA" /> {/* blue */}
