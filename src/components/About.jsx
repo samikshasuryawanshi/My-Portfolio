@@ -32,7 +32,7 @@ const About = () => {
   return (
     <div id='about' className='lg:h-[90vh] h-[150vh] overflow-hidden aboutSection relative text-zinc-50 w-full '>
       {/* Animated Box */}
-      <div className='box1 p-5 absolute lg:left-15 lg:top-15 top-5 left-2 shadow-2xl rounded-lg lg:w-1/2 w-full h-[75vh]  lg:h-[75vh] '>
+      <div className='box1 p-5 absolute lg:left-15 lg:top-15 top-5 left-2 shadow-2xl rounded-lg lg:w-1/2 w-full h-fit  lg:h-fit '>
           <h1 className='lg:text-3xl w-1/2 gradient-border'>About Me</h1>
 
           <div className='flex flex-col justify-start items-start h-fit lg:p-5 p-5'>
