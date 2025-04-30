@@ -52,10 +52,10 @@ const About = () => {
       </div>
 
       {/* Amoeba Section */}
-      <div className='box2 absolute lg:top-[5%] top-[78vh] lg:right-15 w-full lg:w-1/3 h-[70vh] lg:h-[55vh] lg:flex flex-col justify-start items-start'>
+      <div className='box2 absolute lg:top-[5%] top-[78vh] lg:right-15 w-full lg:w-1/3 h-fit lg:flex flex-col justify-start items-start'>
         <Amoeba />
          
-          <div className="contact-cta lg:mt-2 mt-5 text-center">
+          <div className="contact-cta lg:mt-2 mt-10 text-center">
               <h1 className="lg:text-2xl text-lg italic text-gray-300">
                 Want to work together or have a question?
               </h1>

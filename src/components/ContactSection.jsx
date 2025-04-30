@@ -77,67 +77,67 @@ const ContactSection = () => {
 
       {/* Contact Form + Info */}
       <div className="flex flex-col lg:flex-row lg:gap-20 gap-10 justify-between items-start mt-5">
-        {/* Form */}
-        <div
-  ref={formRef}
-  className="w-full lg:w-1/2 p-8 rounded-xl shadow-lg flex flex-col gap-4 bg-zinc-900"
->
-  <h2 className="text-2xl italic text-center bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-    Get In Touch
-  </h2>
+            {/* Form */}
+            <div
+                ref={formRef}
+                className="w-full lg:w-1/2 p-8 rounded-xl shadow-lg flex flex-col gap-4 bg-zinc-900"
+                >
+                <h2 className="text-2xl italic text-center bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+                    Get In Touch
+                </h2>
 
-  <form
-    ref={form}
-    onSubmit={(e) => {
-      e.preventDefault();
-      emailjs
-        .sendForm(
-          'service_6mzqx2u',
-          'template_9q0omwl',
-          form.current,
-          't_TnGMkAikQXY3rfZ'
-        )
-        .then(() => {
-          alert('Message sent successfully!');
-          form.current.reset();
-        })
-        .catch(() => {
-          alert('Failed to send message. Try again later.');
-          form.current.reset();
-        });
-    }}
-    className="flex flex-col gap-4"
-  >
-    <input
-      type="text"
-      name="user_name"
-      placeholder="Your Name"
-      required
-      className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none"
-    />
-    <input
-      type="email"
-      name="user_email"
-      placeholder="Your Email"
-      required
-      className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none"
-    />
-    <textarea
-      name="message"
-      rows="6"
-      placeholder="Your Message"
-      required
-      className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none"
-    />
-    <button
-      id="submit"
-      type="submit"
-      className="bg-violet-600 cursor-pointer hover:bg-violet-700 transition-all duration-300 py-3 w-full lg:w-1/2 mx-auto active:scale-95 rounded font-semibold"
-    >
-      Send Message
-    </button>
-  </form>
-</div>
+                <form
+                    ref={form}
+                    onSubmit={(e) => {
+                    e.preventDefault();
+                    emailjs
+                        .sendForm(
+                        'service_6mzqx2u',
+                        'template_9q0omwl',
+                        form.current,
+                        't_TnGMkAikQXY3rfZ'
+                        )
+                        .then(() => {
+                        alert('Message sent successfully!');
+                        form.current.reset();
+                        })
+                        .catch(() => {
+                        alert('Failed to send message. Try again later.');
+                        form.current.reset();
+                        });
+                    }}
+                    className="flex flex-col gap-4"
+                >
+                    <input
+                    type="text"
+                    name="user_name"
+                    placeholder="Your Name"
+                    required
+                    className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none"
+                    />
+                    <input
+                    type="email"
+                    name="user_email"
+                    placeholder="Your Email"
+                    required
+                    className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none"
+                    />
+                    <textarea
+                    name="message"
+                    rows="6"
+                    placeholder="Your Message"
+                    required
+                    className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none"
+                    />
+                    <button
+                    id="submit"
+                    type="submit"
+                    className="bg-violet-600 cursor-pointer hover:bg-violet-700 transition-all duration-300 py-3 w-full lg:w-1/2 mx-auto active:scale-95 rounded font-semibold"
+                    >
+                    Send Message
+                    </button>
+                </form>
+          </div>
 
 
         {/* Contact Info */}

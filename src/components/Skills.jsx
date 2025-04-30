@@ -116,9 +116,9 @@ const Skills = () => {
             <div
               ref={addToSkillRefs}
               key={index}
-              className="skills flex flex-col cursor-pointer items-start justify-start gap-2 lg:w-fit w-full lg:px-5 lg:py-5 px-5 py-2 h-fit rounded-md"
+              className="skills flex flex-col   cursor-pointer items-start justify-start gap-2 lg:w-fit w-fit  lg:px-5 lg:py-5 px-4 py-2 h-fit rounded-md"
             >
-              <div className="flex items-center lg:gap-30 gap-50 w-fit">
+              <div id='skills' className="flex items-center justify-between lg:w-56 w-50">
                 <img
                   src={skill.img}
                   alt={skill.label}
@@ -172,9 +172,9 @@ const Skills = () => {
 
     <div className='soft-skills lg:mt-15 mt-10 '>
       <h1 className='soft-heading italic lg:text-2xl lg:ml-5 lg:w-fit text-center text-gray-300'>Soft Skills -</h1>
-      <div className="flex flex-wrap lg:gap-5 gap-3 mb-10  lg:p-5 ">
+      <div  className="flex flex-wrap lg:gap-5 gap-3 mb-10  lg:p-5 ">
 
-      <div className="skills flex items-center justify-center gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+      <div className="skills flex items-center lg:justify-center gap-4 shrink-0 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
         <div className="text-3xl text-violet-400">
           <i className="ri-message-2-line"></i> {/* Communication icon */}
         </div>
@@ -185,7 +185,7 @@ const Skills = () => {
       </div>
     
         {/* Soft Skill 1 */}
-        <div className="skills flex  items-center justify-center gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <div className="skills flex  items-center lg:justify-center gap-4 w-fit shrink-0 h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           <div className="text-3xl text-violet-400">
             <i className="ri-team-line"></i>
           </div>
@@ -196,7 +196,7 @@ const Skills = () => {
         </div>
 
         {/* Soft Skill 2 */}
-        <div className="skills flex  items-center justify-center gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <div className="skills flex  items-center lg:justify-center shrink-0 gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           <div className="text-3xl text-green-400">
             <i className="ri-time-line"></i>
           </div>
@@ -207,7 +207,7 @@ const Skills = () => {
         </div>
 
         {/* Soft Skill 3 */}
-        <div className="skills flex  items-center justify-center gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <div className="skills flex  items-center lg:justify-center shrink-0 gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           <div className="text-3xl text-yellow-400">
             <i className="ri-lightbulb-line"></i>
           </div>

@@ -171,3 +171,16 @@ body::-webkit-scrollbar-thumb:hover {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
+
+@media (max-width:520px) {
+
+    .skills{
+        width: 100%;
+    }
+
+    #skills{
+        width: 100%;
+    }
+    
+}
+
