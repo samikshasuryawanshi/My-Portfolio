@@ -40,7 +40,7 @@ const ProjectsData = [
     title: 'Brandium',
     image: './Screenshot (72).png',
     link: 'https://github.com/samikshasuryawanshi/Brandiumm',
-    videoLink:'https://github.com/samikshasuryawanshi/Brandiumm'
+    videoLink:'https://brandiumm.vercel.app/'
 
   },
   {
