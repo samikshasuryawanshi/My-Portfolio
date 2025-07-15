@@ -3,21 +3,81 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ThreadBackground from '../partials/ThreadBackground';
 
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJsSquare,
+  FaReact,
+  FaNodeJs,
+  FaJava
+} from 'react-icons/fa';
+import {
+  SiTailwindcss,
+  SiExpress,
+  SiMongodb,
+  SiNextdotjs
+} from 'react-icons/si';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const skills = [
-  { label: 'HTML/CSS', percent: '90%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',tagLine:'Content Structure' },
-  { label: 'JavaScript', percent: '80%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',tagLine:'Dynamic Behavior' },
-  { label: 'Tailwind CSS', percent: '80%', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/768px-Tailwind_CSS_Logo.svg.png?20230715030042' ,tagLine:'Styling Design' },
-  { label: 'React.js', percent: '80%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',tagLine:'UI Components' },
-  { label: 'Node.js', percent: '75%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' ,tagLine:'Server Runtime' },
-  { label: 'Express.js', percent: '75%', img: 'https://static-00.iconduck.com/assets.00/node-js-icon-909x1024-ig4gm9k7.png',tagLine:'Backend Routing' },
-  { label: 'MongoDB', percent: '70%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',tagLine:'Database Management' },
-  { label: 'Next.js', percent: '50%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' ,tagLine:'Fullstack Framework' },
-  { label: 'Java', percent: '50%', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' ,tagLine:'Programming Language' },
-  // { label: 'Power BI', percent: '30%', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/900px-New_Power_BI_Logo.svg.png?20210102182532' },
+  {
+    label: 'HTML/CSS',
+    percent: '90%',
+    icon: <FaHtml5 color="#e34c26" size={40} />,
+    tagLine: 'Content Structure'
+  },
+  {
+    label: 'JavaScript',
+    percent: '80%',
+    icon: <FaJsSquare color="#f7df1e" size={40} />,
+    tagLine: 'Dynamic Behavior'
+  },
+  {
+    label: 'Tailwind CSS',
+    percent: '80%',
+    icon: <SiTailwindcss color="#38bdf8" size={40} />,
+    tagLine: 'Styling Design'
+  },
+  {
+    label: 'React.js',
+    percent: '80%',
+    icon: <FaReact color="#61dafb" size={40} />,
+    tagLine: 'UI Components'
+  },
+  {
+    label: 'Node.js',
+    percent: '75%',
+    icon: <FaNodeJs color="#3c873a" size={40} />,
+    tagLine: 'Server Runtime'
+  },
+  {
+    label: 'Express.js',
+    percent: '75%',
+    icon: <SiExpress color="#ffffff" size={40} />, // Express has a simple black logo
+    tagLine: 'Backend Routing'
+  },
+  {
+    label: 'MongoDB',
+    percent: '70%',
+    icon: <SiMongodb color="#47A248" size={40} />,
+    tagLine: 'Database Management'
+  },
+  {
+    label: 'Next.js',
+    percent: '50%',
+    icon: <SiNextdotjs color="#ffffff" size={40} />,
+    tagLine: 'Fullstack Framework'
+  },
+  {
+    label: 'Java',
+    percent: '50%',
+    icon: <FaJava color="#f89820" size={40} />,
+    tagLine: 'Programming Language'
+  },
 ];
+
 
 const Skills = () => {
   const boxRef = useRef();
@@ -119,11 +179,7 @@ const Skills = () => {
               className="skills flex flex-col   cursor-pointer items-start justify-start gap-2 lg:w-fit w-fit  lg:px-5 lg:py-5 px-4 py-2 h-fit rounded-md"
             >
               <div id='skills' className="flex items-center justify-between lg:w-56 w-50">
-                <img
-                  src={skill.img}
-                  alt={skill.label}
-                  className={`lg:w-12 w-10 p-2 bg-zinc-800 rounded ${skill.label === 'Express.js' ? 'invert' : ''}`}
-                />
+                {skill.icon}
                 <div className="relative flex items-center justify-center">
                   <svg className="lg:w-14 lg:h-14 h-12 w-12 transform -rotate-90" viewBox="0 0 36 36">
                     {/* Background Circle */}
