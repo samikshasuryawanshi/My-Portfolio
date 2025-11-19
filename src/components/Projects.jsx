@@ -7,50 +7,56 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsData = [
-
   {
     title:'RapidGoods - A Blinkit Clone',
     image:'./Blinkit2.png',
     link:'https://github.com/samikshasuryawanshi/RapidGoods-BlinkitClone-',
     videoLink:'https://github.com/samikshasuryawanshi/RapidGoods-BlinkitClone-'
-
-
   },
+  
   {
-    title: 'Hotel Booking App',
-    image: 'hotelMan.png',
-    link: 'https://github.com/samikshasuryawanshi/HotelManagement',
-    videoLink:'https://github.com/samikshasuryawanshi/HotelManagement'
-
+    title: 'NutriThy - Recipe AI App',
+    image: './nutrithy.png',
+    link: 'https://github.com/RishabhTomar9/Nutrithy',
+    videoLink:'https://nutrithy.web.app/'
   },
+
+  {
+    title: 'VibeDrip - Spotify Clone',
+    image: './vibedrip.png',
+    link: 'https://github.com/samikshasuryawanshi/VibeDrip-SpotifyClone',
+    videoLink:'https://vibedrip-sc.web.app/'
+  },
+
   {
     title: 'Movie App',
     image: './Untitled design.png',
     link: 'https://github.com/samikshasuryawanshi/MovieApp',
     videoLink:'https://movie-app-rosy-alpha.vercel.app/'
   },
-  {
-    title:'DevTube - A Youtube Clone',
-    image:'devtube2.png',
-    link:'https://github.com/samikshasuryawanshi/DevTube',
-    videoLink:'https://github.com/samikshasuryawanshi/DevTube'
 
-  },
+  // {
+  //   title:'DevTube - A Youtube Clone',
+  //   image:'devtube2.png',
+  //   link:'https://github.com/samikshasuryawanshi/DevTube',
+  //   videoLink:'https://github.com/samikshasuryawanshi/DevTube'
+  // },
+
   {
     title: 'Brandium',
     image: './Screenshot (72).png',
     link: 'https://github.com/samikshasuryawanshi/Brandiumm',
     videoLink:'https://brandiumm.vercel.app/'
-
   },
+
   {
     title: 'E-commerce Store',
     image: './FakeApi.png',
     link: 'https://github.com/samikshasuryawanshi/E-Commerce-Fake-Api-Product-',
     videoLink:'https://github.com/samikshasuryawanshi/E-Commerce-Fake-Api-Product-'
-
   }
 ]
+
 
 
 
