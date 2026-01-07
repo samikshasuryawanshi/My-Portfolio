@@ -32,7 +32,7 @@ const Hero = () => {
       <MovingThread />
 
       {/* 1. LAYER: TOP IDENTIFIER */}
-      <div className="overflow-hidden mb-12 mt-10">
+      <div className="overflow-hidden lg:mb-12 mb-10 lg:mt-10 mt-20">
         <motion.div variants={revealVariants} className="flex items-center gap-4">
           <div className="h-[1px] w-12 bg-blue-500 shadow-[0_0_10px_#3b82f6]" />
           <span className="text-[10px] font-mono uppercase tracking-[0.5em] text-blue-500 font-bold">

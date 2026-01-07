@@ -1,113 +1,118 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from '../partials/Nav';
-import { Link } from 'react-scroll'; // Import Link from react-scroll
+import { Link } from 'react-scroll';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
-  const [activeLink, setActiveLink] = useState('home'); // Track the active link
+  const [activeLink, setActiveLink] = useState('home');
   const [openNav, setopenNav] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll for glass effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Home', to: 'home' },
+    { name: 'About Me', to: 'about' },
+    { name: 'Skills', to: 'skills' },
+    { name: 'Projects', to: 'projects' },
+  ];
 
   return (
     <header
-      style={{
-        background: "linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17))",
-      }}
-      className="h-[10vh] px-4 sm:px-5 md:px-6 lg:px-8 flex items-center text-white fixed top-0 left-0 z-[9999] shadow-2xl w-full"
+      className={`fixed  top-0 left-0 w-full z-[9999] transition-all duration-500 px-4 lg:py-4 py-4 sm:px-10  ${
+        isScrolled 
+          ? "lg:h-[10vh] h-[10vh] bg-black/60 backdrop-blur-xl shadow-3xl" 
+          : "lg:h-[10vh] h-[10vh] bg-transparent"
+      } flex items-center text-white`}
     >
-      <div className="flex items-center justify-between w-full mx-auto max-w-screen">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-          Portfolio
-        </h1>
+      <div className="flex items-center justify-between w-full mx-auto max-w-7xl">
+        {/* LOGO ANIMATION */}
+        <motion.h1 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter uppercase"
+        >
+          <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent lg:italic ">
+            Portfolio
+          </span>
+          <motion.span 
+            animate={{ opacity: [0, 1, 0] }} 
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="text-blue-500"
+          >
+            _
+          </motion.span>
+        </motion.h1>
 
-        {/* Mobile Menu Button */}
-        <div className="block lg:hidden">
-          <button
-            className="text-2xl sm:text-2xl"
-            onClick={() => setopenNav(!openNav)}
-          >
-            <i className={`ri-${openNav ? 'close' : 'menu'}-line`}></i>
-          </button>
-
-          <Nav navOpen={openNav} />
-        </div>
-
-        {/* Desktop Navbar */}
-        <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 relative">
-          <div
-            className="absolute bg-gradient-to-r from-blue-500 via-purple-500 to-purple-600 transition-all duration-300 ease-in-out"
-          />
-          <Link
-            to="home"
-            smooth={true}
-            duration={500}
-            offset={-70}
-            spy={true}
-            onSetActive={() => setActiveLink('home')} // Update active link on scroll
-            onClick={() => setActiveLink('home')} // Update active link on click
-            className={`text-base xl:text-lg px-4 py-2 rounded-md transition-all duration-300 relative z-10 cursor-pointer hover:text-blue-500 ${
-              activeLink === 'home' ? 'bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold' : ''
-            }`}
-          >
-            Home
-          </Link>
-          <Link
-            to="about"
-            smooth={true}
-            duration={500}
-            offset={-70}
-            spy={true}
-            onSetActive={() => setActiveLink('about')} // Update active link on scroll
-            onClick={() => setActiveLink('about')} // Update active link on click
-            className={`text-base xl:text-lg px-4 py-2 rounded-md transition-all duration-300 relative z-10 cursor-pointer hover:text-blue-500 ${
-              activeLink === 'about' ? 'bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold' : ''
-            }`}
-          >
-            About Me
-          </Link>
-          <Link
-            to="skills"
-            smooth={true}
-            duration={500}
-            offset={-70}
-            spy={true}
-            onSetActive={() => setActiveLink('skills')} // Update active link on scroll
-            onClick={() => setActiveLink('skills')} // Update active link on click
-            className={`text-base xl:text-lg px-4 py-2 rounded-md transition-all duration-300 relative z-10 cursor-pointer hover:text-blue-500 ${
-              activeLink === 'skills' ? 'bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold' : ''
-            }`}
-          >
-            Skills
-          </Link>
-          <Link
-            to="projects"
-            smooth={true}
-            duration={500}
-            offset={-70}
-            spy={true}
-            onSetActive={() => setActiveLink('projects')} // Update active link on scroll
-            onClick={() => setActiveLink('projects')} // Update active link on click
-            className={`text-base xl:text-lg px-4 py-2 rounded-md transition-all duration-300 relative z-10 cursor-pointer hover:text-blue-500 ${
-              activeLink === 'projects' ? 'bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold' : ''
-            }`}
-          >
-            Projects
-          </Link>
+        {/* DESKTOP NAVBAR */}
+        <nav className="hidden lg:flex items-center bg-zinc-900/40 border border-white/5 p-1.5 rounded-full relative">
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              smooth={true}
+              duration={500}
+              offset={-70}
+              spy={true}
+              onSetActive={() => setActiveLink(link.to)}
+              className="relative px-6 py-2 text-sm font-bold uppercase tracking-widest cursor-pointer z-10"
+            >
+              <span className={`transition-colors duration-300 ${activeLink === link.to ? "text-white" : "text-zinc-500 hover:text-zinc-200"}`}>
+                {link.name}
+              </span>
+              
+              {/* LIQUID PILL INDICATOR */}
+              {activeLink === link.to && (
+                <motion.div
+                  layoutId="activePill"
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full -z-10 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+            </Link>
+          ))}
         </nav>
 
-        <Link
-          to="Lets Connect"
-          smooth={true}
-          duration={500}
-          offset={-70}
-          spy={true}
-          onSetActive={() => setActiveLink('Lets Connect')} // Update active link on scroll
-          onClick={() => setActiveLink('Lets Connect')} // Update active link on click
-          className={`btn btn-secondary hidden lg:block px-4 py-1 xl:px-6 xl:py-3 cursor-pointer active:scale-95 font-semibold text-base xl:text-lg rounded-md bg-zinc-50 text-black hover:bg-zinc-200 transition-all duration-300 ${
-            activeLink === 'Lets Connect' ? 'bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent' : ''
-          }`}
+        {/* CONNECT BUTTON */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
         >
-          Let's Connect
-        </Link>
+          <Link
+            to="Lets Connect"
+            smooth={true}
+            className="hidden lg:flex items-center gap-2 group px-6 py-2.5 bg-white text-black rounded-full font-black uppercase text-[10px] tracking-widest transition-all duration-500 cursor-pointer overflow-hidden relative"
+          >
+            <span className="relative z-10">Initiate Connection</span>
+            <motion.div 
+              whileHover={{ x: 5 }}
+              className="relative z-10"
+            >
+              <i className="ri-arrow-right-up-line text-lg" />
+            </motion.div>
+          </Link>
+        </motion.div>
+
+        {/* MOBILE MENU TOGGLE */}
+        <div className="block lg:hidden relative z-[10001]">
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            className="text-2xl w-12 h-12 flex items-center justify-center rounded-xl bg-zinc-900 border border-white/10"
+            onClick={() => setopenNav(!openNav)}
+          >
+            <i className={`ri-${openNav ? 'close' : 'menu-4'}-fill`}></i>
+          </motion.button>
+        </div>
       </div>
+
+      <Nav navOpen={openNav} setopenNav={setopenNav} />
     </header>
   );
 };
