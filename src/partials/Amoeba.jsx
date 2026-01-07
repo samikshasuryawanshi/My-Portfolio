@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Noise } from "noisejs";
+import { motion } from "framer-motion";
 
 const noise = new Noise(Math.random());
 
@@ -17,11 +18,13 @@ const createPoints = (count, radius) => {
 };
 
 const generateSmoothPath = (points, time) => {
+  // Using 200/200 as the center of a 400x400 viewBox
   const centerX = 200;
   const centerY = 200;
   const coords = points.map((point) => {
     const noiseValue = noise.perlin2(point.noiseOffset, time);
-    const radius = point.baseRadius + noiseValue * 40; // wobbliness
+    // Base radius 100 + noise (max 40) ensures we stay within the 400x400 box (200 + 140 < 400)
+    const radius = point.baseRadius + noiseValue * 40; 
     return {
       x: centerX + Math.cos(point.angle) * radius,
       y: centerY + Math.sin(point.angle) * radius,
@@ -29,7 +32,6 @@ const generateSmoothPath = (points, time) => {
   });
 
   let d = `M ${coords[0].x} ${coords[0].y} `;
-
   for (let i = 0; i < coords.length; i++) {
     const p1 = coords[i];
     const p2 = coords[(i + 1) % coords.length];
@@ -37,43 +39,76 @@ const generateSmoothPath = (points, time) => {
     const midY = (p1.y + p2.y) / 2;
     d += `Q ${p1.x} ${p1.y} ${midX} ${midY} `;
   }
-
   d += "Z";
   return d;
 };
 
 const Amoeba = () => {
   const [time, setTime] = useState(0);
-  const pointsRef = useRef(createPoints(40, 100));
+  const pointsRef = useRef(createPoints(30, 100)); // Fewer points = smoother mobile performance
+  const requestRef = useRef();
+
+  const animate = () => {
+    setTime((t) => t + 0.008);
+    requestRef.current = requestAnimationFrame(animate);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTime((t) => t + 0.006);
-    }, 16); // 60fps
-    return () => clearInterval(interval);
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
   }, []);
 
   const pathData = generateSmoothPath(pointsRef.current, time);
 
   return (
-    <div className="flex justify-center items-center  lg:h-[55vh] h-[40vh] mt-0 lg:mt-0">
-      <img className="z-9 absolute top-[25%] left-[30%] h-[30vh] lg:h-[35vh] " src="./profile.png" alt="svg" />
+    /* RESPONSIVE WRAPPER:
+       Mobile: h-[40vh]
+       Desktop: max-w-[450px] aspect-square
+    */
+    <div className="relative flex justify-center items-center w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[450px] aspect-square mx-auto">
+      
+      {/* PROFILE IMAGE: Scaled to fit inside the 100-radius blob */}
+      <motion.div 
+        animate={{ y: [0, -8, 0] }}
+        transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+        className="absolute z-10 w-[55%] h-[55%] flex justify-center items-center pointer-events-none"
+      >
+        <img 
+          className="w-full h-full object-contain drop-shadow-2xl grayscale-[30%] hover:grayscale-0 transition-all duration-500" 
+          src="./profile.png" 
+          alt="profile" 
+        />
+      </motion.div>
 
-      <svg  viewBox="0 0 400 400" width="500" height="500">
+      {/* SVG: Uses preserveAspectRatio to prevent stretching bugs */}
+      <svg 
+        viewBox="0 0 400 400" 
+        className="w-full h-full filter drop-shadow-2xl"
+        preserveAspectRatio="xMidYMid meet"
+      >
         <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#60A5FA" /> {/* blue */}
-            <stop offset="100%" stopColor="#A78BFA" /> {/* purple */}
+          <linearGradient id="amoebaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#A78BFA" />
           </linearGradient>
+          
+          {/* Blur filter for organic liquid effect */}
+          <filter id="liquid-glow">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
         </defs>
 
         <path
           d={pathData}
-          fill="url(#gradient)"
-          stroke="none"
-          strokeLinejoin="round"
+          fill="url(#amoebaGrad)"
+          filter="url(#liquid-glow)"
+          className="opacity-90"
         />
       </svg>
+
+      {/* Background ambient glow that scales with the container */}
+      <div className="absolute inset-0 bg-blue-500/10 blur-[80px] rounded-full -z-10 animate-pulse" />
     </div>
   );
 };

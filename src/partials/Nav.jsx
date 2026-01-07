@@ -9,7 +9,7 @@ const Nav = ({ navOpen }) => {
 
   return (
     navOpen && (
-      <div className='lg:hidden absolute top-[11vh] right-2 transform duration-200 rounded-md w-1/2 bg-[rgb(21,21,21)] shadow-lg'>
+      <div className='lg:hidden z-[9999] absolute top-[11vh] right-2 transform duration-200 rounded-md w-1/2 bg-[rgb(21,21,21)] shadow-lg'>
         <nav ref={navRef} className='flex flex-col items-center py-4 px-2 gap-4 relative'>
           <div
             className='absolute bg-gradient-to-r from-blue-500 via-purple-500 to-purple-600 transition-all duration-300 ease-in-out opacity-90'

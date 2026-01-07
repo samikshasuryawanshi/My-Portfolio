@@ -11,7 +11,7 @@ const Header = () => {
       style={{
         background: "linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17))",
       }}
-      className="h-[10vh] px-4 sm:px-5 md:px-6 lg:px-8 flex items-center text-white fixed top-0 left-0 z-10 shadow-2xl w-full"
+      className="h-[10vh] px-4 sm:px-5 md:px-6 lg:px-8 flex items-center text-white fixed top-0 left-0 z-[9999] shadow-2xl w-full"
     >
       <div className="flex items-center justify-between w-full mx-auto max-w-screen">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">

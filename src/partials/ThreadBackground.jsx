@@ -23,16 +23,18 @@ export default function ThreadBackground() {
 
     const createThreadGradient = () => {
       const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, "#4b4b56"); // Zinc-600 for thread color
-      grad.addColorStop(1, "#2f2f37"); // Zinc-700 for thread color
+      // Adjusted threads to be slightly more subtle (Zinc-800/900 feel)
+      grad.addColorStop(0, "#3f3f46"); 
+      grad.addColorStop(1, "#18181b"); 
       return grad;
     };
 
     const drawBackground = () => {
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, "rgba(17, 17, 17, 1)");
-      gradient.addColorStop(0.5, "rgba(22, 22, 22, 1)");
-      gradient.addColorStop(1, "rgba(23, 23, 23, 1)");
+      // Darks shifted closer to #000000 for a deeper look
+      gradient.addColorStop(0, "rgba(5, 5, 5, 1)");   
+      gradient.addColorStop(0.5, "rgba(10, 10, 10, 1)"); 
+      gradient.addColorStop(1, "rgba(8, 8, 8, 1)");    
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
@@ -45,9 +47,11 @@ export default function ThreadBackground() {
         const y = (i * 0.5) + thread.offsetY + Math.sin((i + time * thread.speed) * 0.005 + thread.phase) * thread.amplitude;
         ctx.lineTo(x, y);
       }
-      ctx.strokeStyle = createThreadGradient(); // Use Zinc-600 to Zinc-700 for threads
-      ctx.lineWidth = 1.5; // lighter thread
+      ctx.strokeStyle = createThreadGradient();
+      ctx.lineWidth = 1; // Slightly thinner for a cleaner look on dark bg
+      ctx.globalAlpha = 0.6; // Soften the threads so they don't look harsh
       ctx.stroke();
+      ctx.globalAlpha = 1.0;
     };
 
     const animate = (time) => {

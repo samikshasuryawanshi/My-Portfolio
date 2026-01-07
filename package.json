@@ -4,19 +4,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/postcss": "^4.1.4",
     "dot": "^1.1.3",
     "emailjs-com": "^3.2.0",
     "env": "^0.0.2",
     "framer-motion": "^12.9.1",
     "gsap": "^3.12.7",
+    "lenis": "^1.3.17",
+    "lucide-react": "^0.562.0",
     "motion": "^12.9.1",
     "noisejs": "^2.1.0",
     "postcss": "^8.5.3",

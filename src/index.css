@@ -2,10 +2,10 @@
 
 
 html{
-    scroll-behavior: smooth;
+
 }
 body{
-    background: linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17)); 
+    /* background: linear-gradient(to right, rgb(17, 17, 17),rgb(22, 22, 22),rgb(17, 17, 17));  */
     overflow-x: hidden;
 }
 body::-webkit-scrollbar {

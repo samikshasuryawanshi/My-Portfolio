@@ -1,281 +1,172 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import ThreadBackground from '../partials/ThreadBackground';
-
-import {
-  FaHtml5,
-  FaCss3Alt,
-  FaJsSquare,
-  FaReact,
-  FaNodeJs,
-  FaJava
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
+import { 
+  FaHtml5, FaJsSquare, FaReact, FaNodeJs, FaJava 
 } from 'react-icons/fa';
-import {
-  SiTailwindcss,
-  SiExpress,
-  SiMongodb,
-  SiNextdotjs
+import { 
+  SiTailwindcss, SiMongodb, SiNextdotjs, SiExpress 
 } from 'react-icons/si';
-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const skills = [
-  {
-    label: 'HTML/CSS',
-    percent: '90%',
-    icon: <FaHtml5 color="#e34c26" size={40} />,
-    tagLine: 'Content Structure'
-  },
-  {
-    label: 'JavaScript',
-    percent: '80%',
-    icon: <FaJsSquare color="#f7df1e" size={40} />,
-    tagLine: 'Dynamic Behavior'
-  },
-  {
-    label: 'Tailwind CSS',
-    percent: '80%',
-    icon: <SiTailwindcss color="#38bdf8" size={40} />,
-    tagLine: 'Styling Design'
-  },
-  {
-    label: 'React.js',
-    percent: '80%',
-    icon: <FaReact color="#61dafb" size={40} />,
-    tagLine: 'UI Components'
-  },
-  {
-    label: 'Node.js',
-    percent: '75%',
-    icon: <FaNodeJs color="#3c873a" size={40} />,
-    tagLine: 'Server Runtime'
-  },
-  {
-    label: 'Express.js',
-    percent: '75%',
-    icon: <SiExpress color="#ffffff" size={40} />, // Express has a simple black logo
-    tagLine: 'Backend Routing'
-  },
-  {
-    label: 'MongoDB',
-    percent: '70%',
-    icon: <SiMongodb color="#47A248" size={40} />,
-    tagLine: 'Database Management'
-  },
-  {
-    label: 'Next.js',
-    percent: '50%',
-    icon: <SiNextdotjs color="#ffffff" size={40} />,
-    tagLine: 'Fullstack Framework'
-  },
-  {
-    label: 'Java',
-    percent: '50%',
-    icon: <FaJava color="#f89820" size={40} />,
-    tagLine: 'Programming Language'
-  },
+const technicalSkills = [
+  { label: 'HTML/CSS', percent: 95, icon: <FaHtml5 />, color: '#ff4d00' },
+  { label: 'JavaScript', percent: 85, icon: <FaJsSquare />, color: '#f7df1e' },
+  { label: 'React.js', percent: 85, icon: <FaReact />, color: '#00d8ff' },
+  { label: 'Next.js', percent: 80, icon: <SiNextdotjs />, color: '#ffffff' },
+  { label: 'Tailwind', percent: 90, icon: <SiTailwindcss />, color: '#00b4d8' },
+  { label: 'Node.js', percent: 75, icon: <FaNodeJs />, color: '#539e43' },
+  { label: 'MongoDB', percent: 70, icon: <SiMongodb />, color: '#13aa52' },
+  { label: 'Java Core', percent: 65, icon: <FaJava />, color: '#ed8b00' },
 ];
 
-
 const Skills = () => {
-  const boxRef = useRef();
-  const skillRefs = useRef([]);
-
-  const addToSkillRefs = (el) => {
-    if (el && !skillRefs.current.includes(el)) {
-      skillRefs.current.push(el);
-    }
-  };
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.skillsSection',
-        start: 'top 100%',
-        end: 'bottom 80%',
-        scrub: 1,
-      },
-    });
-
-    // Animate the main heading
-    tl.from(boxRef.current, {
-      y: '200px',
-      opacity: 0,
-      duration: 0.6,
-    }, '>');
-
-    // Animate the "Technical skill's" heading
-    tl.from('.technical-heading', {
-      y: 50,
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    }, '>'); // Start slightly earlier to sync with skill text
-
-    // Animate the skill divs
-    tl.from(skillRefs.current, {
-      opacity: 0,
-      y: 50,
-      stagger: 0.1,
-      duration: 0.5,
-      ease: "power2.out",
-    }, "-=0.5"); // Sync with the "Technical skill's" heading
-
-    // Animate the progress circles for all skills
-    gsap.fromTo(
-      skillRefs.current.map((el) => el.querySelector('.progress-circle')), // Target all progress circles
-      { strokeDashoffset: 100 }, // Start from 100 (empty circle)
-      {
-        strokeDashoffset: (i) => 100 - parseInt(skills[i].percent, 10), // Animate to the target percentage
-        duration: 10, // Fill in 5 seconds
-        ease: "power2.out",
+    const ctx = gsap.context(() => {
+      // 1. Heading Animation
+      gsap.from(".reveal-title", {
         scrollTrigger: {
-          trigger: '.skillsSection',
-          start: 'top 100%',
-          toggleActions: 'play none none none', // Trigger once when the section enters
+          trigger: ".skills-header",
+          start: "top 80%",
         },
-      }
-    );
+        y: 100,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1.2,
+        ease: "power4.out"
+      });
 
-    tl.from('.soft-heading', {
-      y: 50,
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    },); 
-    gsap.from('.soft-skills .skills', {
-      opacity: 0,
-      y: 50,
-      stagger: 0.2, // Stagger the animation for each soft skill
-      duration: 0.5,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: '.soft-skills',
-        start: 'top 90%',
-        toggleActions: 'play none none none', // Trigger once when the section enters
-      },
-    });
+      // 2. Power-up Progress Bars
+      gsap.from(".progress-fill", {
+        scrollTrigger: {
+          trigger: ".skills-grid",
+          start: "top 75%",
+        },
+        width: 0,
+        duration: 2,
+        ease: "expo.inOut",
+        stagger: 0.1
+      });
+
+      // 3. Card Entrance
+      gsap.from(".skill-card", {
+        scrollTrigger: {
+          trigger: ".skills-grid",
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 40,
+        stagger: 0.05,
+        duration: 1,
+        ease: "power3.out"
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div id='skills' className="skillsSection relative overflow-hidden min-h-screen lg:p-10 p-5 text-white bg-gradient-to-b">
-
-
-      <div className="h-fit w-1/2 overflow-hidden">
-        <h1 ref={boxRef} className="lg:text-4xl text-2xl font-bold w-full gradient-border-skill">Skill's</h1>
+    <section id='skills' ref={containerRef} className="relative min-h-screen py-24 px-6 lg:px-20 bg-transparent overflow-hidden text-white">
+      
+      {/* 1. HEADER: CYBER TYPOGRAPHY */}
+      <div className="skills-header mb-32 relative">
+        <div className="overflow-hidden">
+          <h1 className="reveal-title text-7xl lg:text-[12rem] font-black uppercase tracking-tighter leading-none opacity-5 select-none">
+            Expertise
+          </h1>
+        </div>
+        <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+          <h2 className="reveal-title text-4xl lg:text-7xl font-bold uppercase flex items-center gap-4">
+            Tech <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent italic">Arsenal.</span>
+          </h2>
+          <div className="h-1 w-24 bg-blue-500 mt-2 rounded-full" />
+        </div>
       </div>
 
-      <div>
-        <h1 className="technical-heading lg:text-2xl text-lg italic mt-5 lg:ml-5 text-center lg:text-left">
-          Technical skill's -
-        </h1>
-        <div className="flex flex-wrap lg:gap-10 gap-5 lg:px-5 lg:py-5 lg:mt-10 mt-5">
-          {skills.map((skill, index) => (
-            <div
-              ref={addToSkillRefs}
-              key={index}
-              className="skills flex flex-col   cursor-pointer items-start justify-start gap-2 lg:w-fit w-fit  lg:px-5 lg:py-5 px-4 py-2 h-fit rounded-md"
-            >
-              <div id='skills' className="flex items-center justify-between lg:w-56 w-50">
-                {skill.icon}
-                <div className="relative flex items-center justify-center">
-                  <svg className="lg:w-14 lg:h-14 h-12 w-12 transform -rotate-90" viewBox="0 0 36 36">
-                    {/* Background Circle */}
-                    <circle
-                      className="text-gray-300"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                      cx="18"
-                      cy="18"
-                      r="15"
-                    />
-                    {/* Progress Circle */}
-                    <circle
-                      className="progress-circle text-purple-400"
-                      stroke="url(#gradient)"
-                      strokeWidth="2"
-                      strokeDasharray="100"
-                      strokeDashoffset="100"
-                      strokeLinecap="round"
-                      fill="none"
-                      cx="18"
-                      cy="18"
-                      r="15"
-                    />
-                    {/* Gradient Definition */}
-                    <defs>
-                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#a855f7" />
-                        <stop offset="50%" stopColor="#c084fc" />
-                        <stop offset="100%" stopColor="#d8b4fe" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <span className="absolute lg:text-sm text-xs text-white">{skill.percent}</span>
+      {/* 2. GRID: DATA MODULES */}
+      <div className="skills-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-40">
+        {technicalSkills.map((skill, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ y: -8 }}
+            className="skill-card group relative p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md overflow-hidden"
+          >
+            {/* Ambient Background Glow */}
+            <div 
+              className="absolute -inset-1 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-2xl"
+              style={{ background: skill.color }}
+            />
+
+            <div className="relative z-10">
+              <div className="flex justify-between items-center mb-8">
+                <span 
+                  className="text-4xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                  style={{ color: skill.color }}
+                >
+                  {skill.icon}
+                </span>
+                <div className="text-right">
+                  <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Efficiency</div>
+                  <div className="text-lg font-black font-mono">{skill.percent}%</div>
                 </div>
               </div>
-             <div className='flex flex-col items-start justify-start lg:gap-1 gap-1'>
-              <h1 className="lg:text-lg lg:mt-0 mt-[-5] text-sm">{skill.label}</h1>
-              <p className='text-sm italic text-zinc-400'>{skill.tagLine}</p>
-             </div>
+
+              <h3 className="text-sm font-bold tracking-widest uppercase mb-4 text-zinc-300 group-hover:text-white">
+                {skill.label}
+              </h3>
+
+              {/* Enhanced Progress Bar */}
+              <div className="h-[6px] w-full bg-zinc-900 rounded-full overflow-hidden relative">
+                <div 
+                  className="progress-fill h-full rounded-full relative"
+                  style={{ 
+                    width: `${skill.percent}%`, 
+                    backgroundColor: skill.color,
+                    boxShadow: `0 0 15px ${skill.color}`
+                  }}
+                >
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
+                </div>
+              </div>
             </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* 3. SOFT ASSETS */}
+      <div className="soft-skills">
+        <div className="flex items-center gap-6 mb-12">
+          <span className="text-[10px] font-mono uppercase tracking-[0.5em] text-blue-500 font-bold">Soft_Capabilities</span>
+          <div className="h-[1px] flex-grow bg-gradient-to-r from-zinc-800 to-transparent" />
+        </div>
+        
+        <div className="flex flex-wrap gap-4">
+          {[
+            { name: 'Communication', icon: 'ri-chat-smile-3-line', color: 'blue' },
+            { name: 'Problem Solving', icon: 'ri-lightbulb-flash-line', color: 'purple' },
+            { name: 'Teamwork', icon: 'ri-team-line', color: 'indigo' },
+            { name: 'Leadership', icon: 'ri-command-line', color: 'cyan' },
+          ].map((soft, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.08)' }}
+              className="flex items-center gap-4 px-8 py-4 border border-zinc-800 rounded-xl bg-zinc-950/40 cursor-default"
+            >
+              <i className={`${soft.icon} text-xl text-${soft.color}-400`} />
+              <span className="text-xs font-bold uppercase tracking-widest">{soft.name}</span>
+            </motion.div>
           ))}
         </div>
       </div>
 
-    <div className='soft-skills lg:mt-15 mt-10 '>
-      <h1 className='soft-heading italic lg:text-2xl lg:ml-5 lg:w-fit text-center text-gray-300'>Soft Skills -</h1>
-      <div  className="flex flex-wrap lg:gap-5 gap-3 mb-10  lg:p-5 ">
-
-      <div className="skills flex items-center lg:justify-center gap-4 shrink-0 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <div className="text-3xl text-violet-400">
-          <i className="ri-message-2-line"></i> {/* Communication icon */}
-        </div>
-        <div className="flex flex-col items-start">
-          <h1 className="lg:text-xl text-sm text-center text-gray-200">Communication</h1>
-          <p className="text-sm italic text-zinc-400">Clear Connector</p>
-        </div>  
-      </div>
-    
-        {/* Soft Skill 1 */}
-        <div className="skills flex  items-center lg:justify-center gap-4 w-fit shrink-0 h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
-          <div className="text-3xl text-violet-400">
-            <i className="ri-team-line"></i>
-          </div>
-         <div className='flex flex-col items-start'>
-            <h1 className="lg:text-xl text-sm text-center text-gray-200">Teamwork</h1>
-            <p className='text-sm italic text-zinc-400'>Collaborative Spirit</p>
-         </div>
-        </div>
-
-        {/* Soft Skill 2 */}
-        <div className="skills flex  items-center lg:justify-center shrink-0 gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
-          <div className="text-3xl text-green-400">
-            <i className="ri-time-line"></i>
-          </div>
-            <div>
-              <h1 className="lg:text-xl text-sm text-center text-gray-200">Problem Solving</h1>
-                <p className='text-sm italic text-zinc-400'>Solution Seeker</p>
-            </div>
-        </div>
-
-        {/* Soft Skill 3 */}
-        <div className="skills flex  items-center lg:justify-center shrink-0 gap-4 w-fit h-fit px-5 py-5 bg-[#1f1f1f] rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
-          <div className="text-3xl text-yellow-400">
-            <i className="ri-lightbulb-line"></i>
-          </div>
-         <div>
-         <h1 className="lg:text-xl text-sm text-center text-gray-200">Time Management</h1>
-         <p className='text-sm italic text-zinc-400'>Deadline Driver</p>
-         </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+      {/* Background Decor */}
+      {/* <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] -z-10 rounded-full" /> */}
+    </section>
   );
 };
 
