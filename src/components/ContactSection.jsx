@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import emailjs from 'emailjs-com';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
+import { db } from '../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ const ContactSection = () => {
   const paragraphRef = useRef();
   const formRef = useRef();
   const infoRef = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -65,6 +67,30 @@ const ContactSection = () => {
     return () => ctx.revert();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(form.current);
+      await addDoc(collection(db, 'messages'), {
+        name: formData.get('user_name'),
+        email: formData.get('user_email'),
+        message: formData.get('message'),
+        timestamp: serverTimestamp(),
+        status: 'unread'
+      });
+
+      alert('Message sent successfully! I\'ll get back to you soon.');
+      form.current.reset();
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message. Please try again or email me directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div
       id="Lets Connect"
@@ -82,7 +108,7 @@ const ContactSection = () => {
       {/* 2. NEW LAYER: ENHANCED INTRO SECTION */}
       <div className="text-center mb-16 space-y-4 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-2 overflow-hidden">
-          <motion.div 
+          <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: "2rem" }}
             transition={{ duration: 1 }}
@@ -91,7 +117,7 @@ const ContactSection = () => {
           <p className="reveal-text text-[10px] font-mono uppercase tracking-[0.5em] text-blue-500 font-bold">
             Establish_Connection
           </p>
-          <motion.div 
+          <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: "2rem" }}
             transition={{ duration: 1 }}
@@ -104,7 +130,7 @@ const ContactSection = () => {
             ref={headingRef}
             className="reveal-text text-4xl lg:text-8xl font-black uppercase tracking-tighter leading-tight bg-gradient-to-r from-white via-zinc-400 to-zinc-700 bg-clip-text text-transparent"
           >
-            Let’s Work <span className="italic font-light text-zinc-500">Together.</span>
+            Let's Work <span className="italic font-light text-zinc-500">Together.</span>
           </h1>
         </div>
 
@@ -113,7 +139,7 @@ const ContactSection = () => {
             ref={paragraphRef}
             className="reveal-text text-zinc-400 max-w-xl mx-auto text-base lg:text-lg font-light leading-relaxed"
           >
-            Currently seeking new opportunities to build scalable digital solutions. 
+            Currently seeking new opportunities to build scalable digital solutions.
             Drop a message to start a conversation.
           </p>
         </div>
@@ -132,19 +158,19 @@ const ContactSection = () => {
 
           <form
             ref={form}
-            onSubmit={(e) => {
-              e.preventDefault();
-              emailjs.sendForm('service_6mzqx2u', 'template_9q0omwl', form.current, 't_TnGMkAikQXY3rfZ')
-                .then(() => { alert('Message sent successfully!'); form.current.reset(); })
-                .catch(() => { alert('Failed to send message. Try again later.'); form.current.reset(); });
-            }}
+            onSubmit={handleSubmit}
             className="flex flex-col gap-4"
           >
             <input type="text" name="user_name" placeholder="Your Name" required className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none" />
             <input type="email" name="user_email" placeholder="Your Email" required className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none" />
             <textarea name="message" rows="6" placeholder="Your Message" required className="p-3 rounded bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none" />
-            <button id="submit" type="submit" className="bg-violet-600 cursor-pointer hover:bg-violet-700 transition-all duration-300 py-3 w-full lg:w-1/2 mx-auto active:scale-95 rounded font-semibold">
-              Send Message
+            <button
+              id="submit"
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-violet-600 cursor-pointer hover:bg-violet-700 transition-all duration-300 py-3 w-full lg:w-1/2 mx-auto active:scale-95 rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>

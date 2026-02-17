@@ -7,6 +7,7 @@ import Projects from './Projects'
 import CareerJourney from './CareerJourney'
 import Certificates from './Certificates'
 import ContactSection from './ContactSection'
+import Footer from './Footer'
 import ThreadBackground from '../partials/ThreadBackground'
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
         <Certificates />
         <ContactSection />
       </main>
+      <Footer />
     </>
   )
 
