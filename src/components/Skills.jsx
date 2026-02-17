@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
-import { 
-  FaHtml5, FaJsSquare, FaReact, FaNodeJs, FaJava 
+import {
+  FaHtml5, FaJsSquare, FaReact, FaNodeJs, FaJava
 } from 'react-icons/fa';
-import { 
-  SiTailwindcss, SiMongodb, SiNextdotjs, SiExpress 
+import {
+  SiTailwindcss, SiMongodb, SiNextdotjs, SiExpress
 } from 'react-icons/si';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -71,7 +71,7 @@ const Skills = () => {
 
   return (
     <section id='skills' ref={containerRef} className="relative min-h-screen py-24 px-6 lg:px-20 bg-transparent overflow-hidden text-white">
-      
+
       {/* 1. HEADER: CYBER TYPOGRAPHY */}
       <div className="skills-header mb-32 relative">
         <div className="overflow-hidden">
@@ -96,14 +96,14 @@ const Skills = () => {
             className="skill-card group relative p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md overflow-hidden"
           >
             {/* Ambient Background Glow */}
-            <div 
+            <div
               className="absolute -inset-1 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-2xl"
               style={{ background: skill.color }}
             />
 
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-8">
-                <span 
+                <span
                   className="text-4xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
                   style={{ color: skill.color }}
                 >
@@ -121,10 +121,10 @@ const Skills = () => {
 
               {/* Enhanced Progress Bar */}
               <div className="h-[6px] w-full bg-zinc-900 rounded-full overflow-hidden relative">
-                <div 
+                <div
                   className="progress-fill h-full rounded-full relative"
-                  style={{ 
-                    width: `${skill.percent}%`, 
+                  style={{
+                    width: `${skill.percent}%`,
                     backgroundColor: skill.color,
                     boxShadow: `0 0 15px ${skill.color}`
                   }}
@@ -138,31 +138,93 @@ const Skills = () => {
         ))}
       </div>
 
-      {/* 3. SOFT ASSETS */}
+      {/* 3. SOFT ASSETS — Infinite Scroll Marquee */}
       <div className="soft-skills">
         <div className="flex items-center gap-6 mb-12">
-          <span className="text-[10px] font-mono uppercase tracking-[0.5em] text-blue-500 font-bold">Soft_Capabilities</span>
+          <span className="text-[10px] font-mono uppercase tracking-[0.5em] text-blue-500 font-bold">Soft Skills</span>
           <div className="h-[1px] flex-grow bg-gradient-to-r from-zinc-800 to-transparent" />
         </div>
-        
-        <div className="flex flex-wrap gap-4">
-          {[
-            { name: 'Communication', icon: 'ri-chat-smile-3-line', color: 'blue' },
-            { name: 'Problem Solving', icon: 'ri-lightbulb-flash-line', color: 'purple' },
-            { name: 'Teamwork', icon: 'ri-team-line', color: 'indigo' },
-            { name: 'Leadership', icon: 'ri-command-line', color: 'cyan' },
-          ].map((soft, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.08)' }}
-              className="flex items-center gap-4 px-8 py-4 border border-zinc-800 rounded-xl bg-zinc-950/40 cursor-default"
-            >
-              <i className={`${soft.icon} text-xl text-${soft.color}-400`} />
-              <span className="text-xs font-bold uppercase tracking-widest">{soft.name}</span>
-            </motion.div>
-          ))}
+
+        {/* Marquee container — Row 1 (left) */}
+        <div className="relative overflow-hidden group/marquee mb-4">
+          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="flex gap-4 w-max group-hover/marquee:[animation-play-state:paused]"
+            style={{ animation: 'marquee-scroll 25s linear infinite' }}
+          >
+            {[...Array(2)].map((_, setIndex) => (
+              <React.Fragment key={setIndex}>
+                {[
+                  { name: 'Communication', emoji: '💬', color: 'blue' },
+                  { name: 'Problem Solving', emoji: '💡', color: 'purple' },
+                  { name: 'Teamwork', emoji: '🤝', color: 'indigo' },
+                  { name: 'Leadership', emoji: '🚀', color: 'cyan' },
+                  { name: 'Adaptability', emoji: '🔄', color: 'amber' },
+                ].map((soft, i) => (
+                  <div
+                    key={`${setIndex}-${i}`}
+                    className={`group/card relative flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3.5 sm:py-4 border border-white/[0.06] rounded-2xl bg-white/[0.02] backdrop-blur-sm cursor-default shrink-0 hover:border-${soft.color}-500/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden`}
+                  >
+                    <div className={`absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-${soft.color}-500 to-transparent opacity-0 group-hover/card:opacity-40 transition-opacity duration-500`} />
+                    <span className="text-xl sm:text-2xl">{soft.emoji}</span>
+                    <div>
+                      <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest whitespace-nowrap text-zinc-300">{soft.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+        {/* Marquee container — Row 2 (right, reverse) */}
+        <div className="relative overflow-hidden group/marquee2">
+          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-[#030303] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-[#030303] to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="flex gap-4 w-max group-hover/marquee2:[animation-play-state:paused]"
+            style={{ animation: 'marquee-scroll-reverse 22s linear infinite' }}
+          >
+            {[...Array(2)].map((_, setIndex) => (
+              <React.Fragment key={setIndex}>
+                {[
+                  { name: 'Time Management', emoji: '⏱️', color: 'blue' },
+                  { name: 'Creativity', emoji: '🎨', color: 'purple' },
+                  { name: 'Critical Thinking', emoji: '🧠', color: 'cyan' },
+                  { name: 'Decision Making', emoji: '🎯', color: 'amber' },
+                  { name: 'Attention to Detail', emoji: '🔍', color: 'indigo' },
+                ].map((soft, i) => (
+                  <div
+                    key={`${setIndex}-${i}`}
+                    className={`group/card relative flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3.5 sm:py-4 border border-white/[0.06] rounded-2xl bg-white/[0.02] backdrop-blur-sm cursor-default shrink-0 hover:border-${soft.color}-500/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden`}
+                  >
+                    <div className={`absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-${soft.color}-500 to-transparent opacity-0 group-hover/card:opacity-40 transition-opacity duration-500`} />
+                    <span className="text-xl sm:text-2xl">{soft.emoji}</span>
+                    <div>
+                      <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest whitespace-nowrap text-zinc-300">{soft.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Marquee keyframes */}
+      <style>{`
+        @keyframes marquee-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-scroll-reverse {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
 
       {/* Background Decor */}
       {/* <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] -z-10 rounded-full" /> */}

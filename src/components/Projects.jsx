@@ -2,206 +2,334 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
-import { Code2, Play, ExternalLink, Box } from 'lucide-react';
+import { ExternalLink, Github, Layers, Fingerprint, Sparkles, Calendar, ArrowUpRight, Code2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsData = [
   {
-    title: 'RapidGoods - Blinkit Clone',
+    title: 'RapidGoods',
+    subtitle: 'Blinkit Clone',
     image: './Blinkit2.png',
-    link: 'https://github.com/samikshasuryawanshi/RapidGoods-BlinkitClone-',
-    videoLink: 'https://github.com/samikshasuryawanshi/RapidGoods-BlinkitClone-',
-    tech: 'MERN Stack'
+    github: 'https://github.com/samikshasuryawanshi/RapidGoods-BlinkitClone-',
+    live: 'https://github.com/samikshasuryawanshi/RapidGoods-BlinkitClone-',
+    tech: ['React', 'Node.js', 'MongoDB', 'Express'],
+    color: 'blue',
+    description: 'A full-stack grocery delivery app inspired by Blinkit, with real-time order tracking, product search, and a smooth checkout flow.',
   },
   {
-    title: 'NutriThy - Recipe AI App',
+    title: 'NutriThy',
+    subtitle: 'AI Recipe Finder',
     image: './nutrithy.png',
-    link: 'https://github.com/RishabhTomar9/Nutrithy',
-    videoLink: 'https://nutrithy.web.app/',
-    tech: 'React / AI API'
+    github: 'https://github.com/RishabhTomar9/Nutrithy',
+    live: 'https://nutrithy.web.app/',
+    tech: ['React', 'AI API', 'Firebase'],
+    color: 'purple',
+    description: 'An AI-powered recipe app that suggests meals based on ingredients you have, with nutritional breakdowns and step-by-step guides.',
   },
   {
-    title: 'VibeDrip - Spotify Clone',
+    title: 'VibeDrip',
+    subtitle: 'Spotify Clone',
     image: './vibedrip.png',
-    link: 'https://github.com/samikshasuryawanshi/VibeDrip-SpotifyClone',
-    videoLink: 'https://vibedrip-sc.web.app/',
-    tech: 'React / Firebase'
+    github: 'https://github.com/samikshasuryawanshi/VibeDrip-SpotifyClone',
+    live: 'https://vibedrip-sc.web.app/',
+    tech: ['React', 'Firebase', 'Spotify API'],
+    color: 'cyan',
+    description: 'A music streaming app with playlist management, search, and playback controls — built to feel like the real thing.',
   },
   {
-    title: 'Movie App',
+    title: 'MovieHub',
+    subtitle: 'Movie Discovery App',
     image: './Untitled design.png',
-    link: 'https://github.com/samikshasuryawanshi/MovieApp',
-    videoLink: 'https://movie-app-rosy-alpha.vercel.app/',
-    tech: 'Next.js'
+    github: 'https://github.com/samikshasuryawanshi/MovieApp',
+    live: 'https://movie-app-rosy-alpha.vercel.app/',
+    tech: ['Next.js', 'TMDB API'],
+    color: 'amber',
+    description: 'A movie discovery platform with trending lists, search, detailed pages, and responsive design powered by the TMDB API.',
   },
   {
     title: 'Brandium',
+    subtitle: 'Agency Landing Page',
     image: './Screenshot (72).png',
-    link: 'https://github.com/samikshasuryawanshi/Brandiumm',
-    videoLink: 'https://brandiumm.vercel.app/',
-    tech: 'UI/UX'
+    github: 'https://github.com/samikshasuryawanshi/Brandiumm',
+    live: 'https://brandiumm.vercel.app/',
+    tech: ['React', 'Tailwind', 'Framer Motion'],
+    color: 'purple',
+    description: 'A sleek, modern agency landing page with smooth animations, responsive layouts, and a premium visual identity.',
   },
   {
-    title: 'E-commerce Store',
+    title: 'ShopEase',
+    subtitle: 'E-Commerce Store',
     image: './FakeApi.png',
-    link: 'https://github.com/samikshasuryawanshi/E-Commerce-Fake-Api-Product-',
-    videoLink: 'https://github.com/samikshasuryawanshi/E-Commerce-Fake-Api-Product-',
-    tech: 'REST API'
-  }
+    github: 'https://github.com/samikshasuryawanshi/E-Commerce-Fake-Api-Product-',
+    live: 'https://github.com/samikshasuryawanshi/E-Commerce-Fake-Api-Product-',
+    tech: ['React', 'REST API', 'Tailwind'],
+    color: 'cyan',
+    description: 'A clean e-commerce storefront with product listings, cart functionality, and dynamic filtering using a REST API.',
+  },
 ];
+
+const colorMap = {
+  blue: {
+    border: 'hover:border-blue-500/20',
+    icon: 'text-blue-400',
+    iconBg: 'bg-blue-500/10 border-blue-500/15',
+    badge: 'bg-blue-500/10 text-blue-300 border-blue-500/15',
+    btnHover: 'hover:border-blue-500/30 hover:bg-blue-500/[0.06]',
+    accentLine: 'from-blue-500 to-transparent',
+    solid: 'bg-blue-500',
+    solidText: 'text-blue-400',
+  },
+  purple: {
+    border: 'hover:border-purple-500/20',
+    icon: 'text-purple-400',
+    iconBg: 'bg-purple-500/10 border-purple-500/15',
+    badge: 'bg-purple-500/10 text-purple-300 border-purple-500/15',
+    btnHover: 'hover:border-purple-500/30 hover:bg-purple-500/[0.06]',
+    accentLine: 'from-purple-500 to-transparent',
+    solid: 'bg-purple-500',
+    solidText: 'text-purple-400',
+  },
+  cyan: {
+    border: 'hover:border-cyan-500/20',
+    icon: 'text-cyan-400',
+    iconBg: 'bg-cyan-500/10 border-cyan-500/15',
+    badge: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/15',
+    btnHover: 'hover:border-cyan-500/30 hover:bg-cyan-500/[0.06]',
+    accentLine: 'from-cyan-500 to-transparent',
+    solid: 'bg-cyan-500',
+    solidText: 'text-cyan-400',
+  },
+  amber: {
+    border: 'hover:border-amber-500/20',
+    icon: 'text-amber-400',
+    iconBg: 'bg-amber-500/10 border-amber-500/15',
+    badge: 'bg-amber-500/10 text-amber-300 border-amber-500/15',
+    btnHover: 'hover:border-amber-500/30 hover:bg-amber-500/[0.06]',
+    accentLine: 'from-amber-500 to-transparent',
+    solid: 'bg-amber-500',
+    solidText: 'text-amber-400',
+  },
+};
+
+const ProjectCard = ({ project, index }) => {
+  const c = colorMap[project.color];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.7, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4 }}
+      className={`group relative bg-white/[0.02] backdrop-blur-xl border border-white/[0.04] ${c.border} rounded-2xl transition-all duration-500 overflow-hidden`}
+    >
+      {/* Top accent line */}
+      <div className={`absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r ${c.accentLine} opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
+
+      {/* Floating sparkle on hover */}
+      <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+        <motion.div
+          animate={{ y: [-2, 2, -2], rotate: [0, 5, -5, 0] }}
+          transition={{ repeat: Infinity, duration: 4 }}
+        >
+          <Sparkles size={14} className={`${c.icon} opacity-40`} />
+        </motion.div>
+      </div>
+
+      {/* Image */}
+      <div className="relative w-full h-44 sm:h-52 overflow-hidden">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+
+        {/* Live preview CTA on hover */}
+        {project.live && (
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white/90 backdrop-blur-md text-black w-12 h-12 rounded-full flex items-center justify-center shadow-2xl"
+            >
+              <ArrowUpRight size={20} />
+            </motion.a>
+          </div>
+        )}
+
+        {/* Project number badge */}
+        <div className="absolute top-3 right-3">
+          <div className={`text-[8px] sm:text-[9px] font-mono px-2 sm:px-2.5 py-1 rounded-md border backdrop-blur-md ${c.badge} flex items-center gap-1`}>
+            <Code2 size={9} /> #{String(index + 1).padStart(2, '0')}
+          </div>
+        </div>
+      </div>
+
+      {/* Card body */}
+      <div className="relative z-10 p-5 sm:p-7 lg:p-8 space-y-4 sm:space-y-5">
+        {/* Title & Subtitle */}
+        <div className="space-y-1.5">
+          <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white tracking-tight leading-snug">
+            {project.title}
+          </h3>
+          <div className="flex items-center gap-2 text-zinc-500 text-xs sm:text-sm">
+            <Layers size={13} />
+            <span className="font-medium">{project.subtitle}</span>
+          </div>
+        </div>
+
+        {/* Description */}
+        <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed line-clamp-2">
+          {project.description}
+        </p>
+
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.tech.map((t) => (
+            <span
+              key={t}
+              className={`text-[8px] sm:text-[9px] font-mono font-medium px-2 sm:px-2.5 py-1 rounded-md border ${c.badge} transition-all duration-300 hover:scale-105`}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="h-[1px] w-full bg-gradient-to-r from-white/[0.04] via-white/[0.08] to-white/[0.04]" />
+
+        {/* Action buttons */}
+        <div className="flex items-center gap-2">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex-1 flex items-center justify-center gap-2 sm:gap-2.5 py-3 sm:py-3.5 rounded-xl border border-white/[0.06] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-400 hover:text-white ${c.btnHover} transition-all duration-500 relative overflow-hidden`}
+          >
+            <Github size={13} /> Source Code
+            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
+          </a>
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex-1 flex items-center justify-center gap-2 sm:gap-2.5 py-3 sm:py-3.5 rounded-xl border border-white/[0.06] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-400 hover:text-white ${c.btnHover} transition-all duration-500 relative overflow-hidden`}
+            >
+              <ExternalLink size={13} /> Live Demo
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const Projects = () => {
   const containerRef = useRef(null);
-  const bgTextRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Header Reveal
-      gsap.from(".reveal-up", {
-        scrollTrigger: {
-          trigger: ".project-header",
-          start: "top 85%",
-        },
-        y: 100,
+      gsap.from('.project-header-reveal', {
+        y: 60,
         opacity: 0,
         stagger: 0.1,
-        duration: 1,
-        ease: "power4.out"
-      });
-
-      // 2. Project Card Stagger
-      gsap.from(".project-card", {
-        scrollTrigger: {
-          trigger: ".projects-grid",
-          start: "top 80%",
-        },
-        opacity: 0,
-        y: 60,
-        scale: 0.95,
-        stagger: 0.15,
         duration: 1.2,
-        ease: "expo.out"
-      });
-
-      // 3. NEW: Background Text Parallax Animation
-      gsap.to(bgTextRef.current, {
+        ease: 'expo.out',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 2, // Smooth follow
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
         },
-        x: -200, // Moves left as you scroll down
-        ease: "none"
       });
-
-      // 4. NEW: Protocol Watermark Animation
-      gsap.from(".protocol-text", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top center",
-          scrub: 1,
-        },
-        x: 300,
-        opacity: 0,
-      });
-
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section 
-      id='projects' 
-      ref={containerRef} 
-      className='min-h-screen relative overflow-hidden projectSection text-white lg:p-20 p-6 bg-transparent'
+    <section
+      id="projects"
+      ref={containerRef}
+      className="relative text-zinc-100 py-16 sm:py-24 lg:py-36 overflow-hidden"
     >
-      {/* --- BACKGROUND TEXT LAYERS --- */}
-      
-      {/* 1. Main Parallax Watermark */}
-      <div 
-        ref={bgTextRef}
-        className="absolute top-[10%] left-[10%] whitespace-nowrap opacity-[0.03] text-[25vw] font-black pointer-events-none select-none -z-10 leading-none"
-      >
-        WORKS // 2026
-      </div>
+      {/* Background grid */}
+      <div className="absolute inset-0 opacity-[0.012] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
 
+      <div className="container mx-auto px-4 sm:px-6 lg:px-15 relative z-10">
 
-      {/* --- CONTENT SECTION --- */}
+        {/* ── Section Header with Watermark ── */}
+        <div className="mb-12 sm:mb-16 lg:mb-24 relative">
+          {/* Watermark */}
+          <div className="overflow-hidden">
+            <h1 className="project-header-reveal text-6xl sm:text-7xl lg:text-[15rem] font-black uppercase tracking-tighter leading-none opacity-5 select-none pointer-events-none">
+              Projects
+            </h1>
+          </div>
 
-      <div className="project-header mb-20">
-        <div className="flex items-center gap-4 mb-4">
-          <Code2 className="text-blue-500 animate-pulse" size={20} />
-          <span className="text-blue-500 font-mono text-[10px] tracking-[0.4em] uppercase">Archive_System.v2</span>
-        </div>
-        <div className="overflow-hidden">
-          <h1 className='reveal-up lg:text-8xl text-4xl font-black uppercase tracking-tighter leading-none'>
-            Project <br /> <span className="text-zinc-700 italic font-light">Showcase.</span>
-          </h1>
-        </div>
-      </div>
-
-      <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {ProjectsData.map((project, index) => (
-          <motion.div 
-            key={index}
-            whileHover={{ y: -10 }}
-            className='project-card group relative flex flex-col bg-zinc-900/10 border border-white/5 rounded-3xl overflow-hidden backdrop-blur-sm'
-          >
-            <div className="relative w-full h-72 overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className='w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out' 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <motion.button
-                  onClick={() => window.open(project.videoLink, '_blank')}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="bg-white text-black w-14 h-14 rounded-full flex items-center justify-center shadow-2xl"
-                >
-                  <Play size={24} fill="black" />
-                </motion.button>
+          {/* Heading over watermark */}
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 space-y-4 sm:space-y-6 w-full">
+            <div className="flex items-center gap-4 sm:gap-6 project-header-reveal">
+              <div className="flex items-center gap-2 text-blue-400 font-mono text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+                <Fingerprint size={14} /> My Work
               </div>
-              <div className="absolute top-4 left-4 px-3 py-1 bg-black/60 border border-white/10 rounded-full backdrop-blur-md">
-                <span className="text-[9px] font-mono tracking-widest uppercase text-zinc-300">{project.tech}</span>
-              </div>
+              <div className="h-[1px] flex-1 bg-zinc-800/60" />
             </div>
 
-            <div className='p-6 flex flex-col gap-4 flex-grow'>
-              <div className="flex justify-between items-start">
-                <div className="space-y-1">
-                  <h2 className='text-xl font-bold tracking-tight group-hover:text-blue-400 transition-colors'>
-                    {project.title}
-                  </h2>
-                  <div className="flex items-center gap-2">
-                    <Box size={10} className="text-zinc-600" />
-                    <span className="text-[10px] text-zinc-600 font-mono uppercase tracking-[0.2em]">Deployment_Stable</span>
-                  </div>
-                </div>
-                <motion.a 
-                  href={project.link} 
-                  target="_blank"
-                  whileHover={{ rotate: 45, backgroundColor: '#3b82f6' }}
-                  className='bg-zinc-800/50 p-3 rounded-xl border border-white/5'
-                >
-                  <ExternalLink size={18} />
-                </motion.a>
-              </div>
-              <div className="h-[1px] w-full bg-zinc-800 relative overflow-hidden">
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent w-1/2"
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            <h2 className="project-header-reveal text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9]">
+              Featured{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
+                Projects
+              </span>
+            </h2>
+
+            <p className="project-header-reveal text-sm sm:text-base lg:text-lg text-zinc-500 max-w-xl leading-relaxed">
+              A collection of projects I've built — from full-stack apps to polished landing pages.
+            </p>
+          </div>
+        </div>
+
+        {/* ── Project Cards Grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+          {ProjectsData.map((project, index) => (
+            <ProjectCard key={index} project={project} index={index} />
+          ))}
+        </div>
+
+        {/* ── Bottom summary (matching Certificates) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-10 sm:mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-[9px] sm:text-[10px] font-mono text-zinc-600 tracking-[0.3em] uppercase"
+        >
+          <span className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-blue-500/50" />
+            {ProjectsData.filter(p => p.color === 'blue').length} Full-Stack
+          </span>
+          <div className="hidden sm:block h-3 w-[1px] bg-zinc-800" />
+          <span className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-purple-500/50" />
+            {ProjectsData.filter(p => p.color === 'purple').length} UI/Frontend
+          </span>
+          <div className="hidden sm:block h-3 w-[1px] bg-zinc-800" />
+          <span className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-cyan-500/50" />
+            {ProjectsData.filter(p => p.color === 'cyan').length} API-Driven
+          </span>
+        </motion.div>
       </div>
     </section>
   );

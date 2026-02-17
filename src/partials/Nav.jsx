@@ -7,21 +7,23 @@ const Nav = ({ navOpen, setopenNav }) => {
     { name: 'About', to: 'about' },
     { name: 'Skills', to: 'skills' },
     { name: 'Projects', to: 'projects' },
+    { name: 'Career', to: 'career' },
+    { name: 'Certificates', to: 'certificates' },
     { name: 'Contact', to: 'Lets Connect' },
   ];
 
   const menuVariants = {
     closed: { opacity: 0, x: "100%" },
-    open: { 
-      opacity: 1, 
+    open: {
+      opacity: 1,
       x: 0,
-      transition: { 
-        type: "spring", 
-        stiffness: 100, 
+      transition: {
+        type: "spring",
+        stiffness: 100,
         damping: 20,
         staggerChildren: 0.1,
         delayChildren: 0.2
-      } 
+      }
     }
   };
 
@@ -35,7 +37,7 @@ const Nav = ({ navOpen, setopenNav }) => {
       {navOpen && (
         <>
           {/* Backdrop Blur */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -55,7 +57,7 @@ const Nav = ({ navOpen, setopenNav }) => {
               <p className="text-[10px] font-mono uppercase tracking-[0.5em] text-zinc-500 mb-4">
                 System Menu
               </p>
-              
+
               {sections.map((section, idx) => (
                 <motion.div key={section.to} variants={itemVariants}>
                   <Link

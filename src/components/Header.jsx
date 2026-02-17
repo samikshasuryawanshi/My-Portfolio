@@ -22,19 +22,20 @@ const Header = () => {
     { name: 'About Me', to: 'about' },
     { name: 'Skills', to: 'skills' },
     { name: 'Projects', to: 'projects' },
+    { name: 'Career', to: 'career' },
+    { name: 'Certificates', to: 'certificates' },
   ];
 
   return (
     <header
-      className={`fixed  top-0 left-0 w-full z-[9999] transition-all duration-500 px-4 lg:py-4 py-4 sm:px-10  ${
-        isScrolled 
-          ? "lg:h-[10vh] h-[10vh] bg-black/60 backdrop-blur-xl shadow-3xl" 
+      className={`fixed  top-0 left-0 w-full z-[9999] transition-all duration-500 px-4 lg:py-4 py-4 sm:px-10  ${isScrolled
+          ? "lg:h-[10vh] h-[10vh] bg-black/60 backdrop-blur-xl shadow-3xl"
           : "lg:h-[10vh] h-[10vh] bg-transparent"
-      } flex items-center text-white`}
+        } flex items-center text-white`}
     >
       <div className="flex items-center justify-between w-full mx-auto max-w-7xl">
         {/* LOGO ANIMATION */}
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter uppercase"
@@ -42,8 +43,8 @@ const Header = () => {
           <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent lg:italic ">
             Portfolio
           </span>
-          <motion.span 
-            animate={{ opacity: [0, 1, 0] }} 
+          <motion.span
+            animate={{ opacity: [0, 1, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
             className="text-blue-500"
           >
@@ -67,7 +68,7 @@ const Header = () => {
               <span className={`transition-colors duration-300 ${activeLink === link.to ? "text-white" : "text-zinc-500 hover:text-zinc-200"}`}>
                 {link.name}
               </span>
-              
+
               {/* LIQUID PILL INDICATOR */}
               {activeLink === link.to && (
                 <motion.div
@@ -90,8 +91,8 @@ const Header = () => {
             smooth={true}
             className="hidden lg:flex items-center gap-2 group px-6 py-2.5 bg-white text-black rounded-full font-black uppercase text-[10px] tracking-widest transition-all duration-500 cursor-pointer overflow-hidden relative"
           >
-            <span className="relative z-10">Initiate Connection</span>
-            <motion.div 
+            <span className="relative z-10">Lets Connect</span>
+            <motion.div
               whileHover={{ x: 5 }}
               className="relative z-10"
             >
